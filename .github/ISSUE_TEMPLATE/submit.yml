@@ -1,0 +1,44 @@
+name: 誤り報告・改善提案
+description: 教材の誤り（誤字・数式・説明）や改善案を報告します。
+title: "[report] "
+labels: ["report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        報告ありがとうございます。できるだけ具体的に書いていただけると助かります。
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 種類
+      options:
+        - 誤字・脱字
+        - 数式の誤り
+        - 説明の誤り・わかりにくさ
+        - 問題・解答の誤り
+        - 改善提案（新しい内容・例題など）
+        - その他
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: 該当箇所
+      description: ファイルパスや章・節番号（例 ch01-numbers/docs/index.md 1.2）
+      placeholder: ch01-numbers/docs/index.md 1.2
+    validations:
+      required: true
+  - type: textarea
+    id: detail
+    attributes:
+      label: 内容
+      description: どこがどう問題か、どう直すべきかを書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 修正案（任意）
+      description: 具体的な修正文・数式があれば記入してください。
+    validations:
+      required: false

@@ -1,0 +1,28 @@
+name: notify-web
+
+# main への push を web 側リポジトリに通知して再ビルドを促す。
+# 送信先は repository_dispatch を受け取る web 側リポジトリを想定。
+on:
+  push:
+    branches: [main]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch build event to web repo
+        env:
+          # web 側リポジトリへの repo スコープ付き PAT を Secrets に登録しておく
+          WEB_DISPATCH_TOKEN: ${{ secrets.WEB_DISPATCH_TOKEN }}
+          # 送信先リポジトリ（owner/repo）
+          WEB_REPO: ${{ vars.WEB_REPO }}
+        run: |
+          if [ -z "$WEB_DISPATCH_TOKEN" ] || [ -z "$WEB_REPO" ]; then
+            echo "WEB_DISPATCH_TOKEN / WEB_REPO が未設定のためスキップします。" >&2
+            exit 0
+          fi
+          curl -sSf -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${WEB_DISPATCH_TOKEN}" \
+            "https://api.github.com/repos/${WEB_REPO}/dispatches" \
+            -d "{\"event_type\":\"basic-math-updated\",\"client_payload\":{\"sha\":\"${GITHUB_SHA}\",\"ref\":\"${GITHUB_REF}\"}}"

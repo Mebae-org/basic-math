@@ -1,0 +1,61 @@
+name: 第1章 確認テスト
+description: 第1章の確認テストに回答します
+title: "[確認テスト] 第1章"
+labels: ["quiz", "ch01"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ⚠️ **注意**
+
+        回答は公開されます。他の人の回答が見える場合があります。
+        個人情報は書かないでください。
+
+        各問、答えの数値だけを入力してください（全角・半角は問いません）。
+  - type: input
+    id: q1
+    attributes:
+      label: 問1
+      description: $2 + 3 \times 4$ を計算せよ。
+      placeholder: 例) 14
+    validations:
+      required: true
+  - type: input
+    id: q2
+    attributes:
+      label: 問2
+      description: $|{-7}|$ の値を求めよ。
+      placeholder: 例) 7
+    validations:
+      required: true
+  - type: input
+    id: q3
+    attributes:
+      label: 問3
+      description: $(x+3)(x-3)$ を展開したときの定数項を求めよ。
+      placeholder: 例) -9
+    validations:
+      required: true
+  - type: input
+    id: q4
+    attributes:
+      label: 問4
+      description: $\sqrt{16}$ の値を求めよ。
+      placeholder: 例) 4
+    validations:
+      required: true
+  - type: input
+    id: q5
+    attributes:
+      label: 問5
+      description: $x^2 - 5x + 6 = 0$ の解のうち大きい方を求めよ。
+      placeholder: 例) 3
+    validations:
+      required: true
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: 確認
+      options:
+        - label: 回答が公開されることを理解しています
+          required: true

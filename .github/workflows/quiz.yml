@@ -1,0 +1,109 @@
+name: quiz
+
+# 確認テストの Issue が作られたら自動採点する。
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  grade:
+    # quiz ラベルが付いた Issue だけ採点する
+    if: contains(github.event.issue.labels.*.name, 'quiz')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Grade quiz answers
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const crypto = require('crypto');
+
+            // --- 正解ハッシュ（平文はリポジトリに置かない） -------------------
+            // scripts/make-answer-hash.js で生成した値に差し替えて使う。
+            // 下は仮のプレースホルダ（PLACEHOLDER-1 〜 5 のハッシュ）。
+            const answerHashes = {
+              q1: '954314516526bcb5ab0d799b23db74cf43412c2e0267eaf74f7d38b18837cc4b',
+              q2: '180f643b5a41152b1faae18ab693f8fe98fb47ebcf8274c7ef70bc1836a9ad1a',
+              q3: 'e04954fb9600181dee80fffb8601e135a03a50478dd46e9c87e26fbde14d498b',
+              q4: 'b04043e4960a1ed4c1861462b964e594b5bb3a541b4bfb87ba62ed3330c23290',
+              q5: '618785c666f42bf83c2fd3bd8a0e5abe5c0a3967476385c87c3b6e32e835b7ea',
+            };
+
+            // 設問 id と Issue Forms 上の見出し（label）の対応
+            const labels = {
+              q1: '問1', q2: '問2', q3: '問3', q4: '問4', q5: '問5',
+            };
+
+            // --- 正規化: scripts/make-answer-hash.js と完全一致させること -------
+            function normalize(s) {
+              return String(s)
+                .replace(/[！-～]/g, (ch) =>
+                  String.fromCharCode(ch.charCodeAt(0) - 0xfee0)
+                )
+                .replace(/[−–—]/g, '-')
+                .replace(/[\s　]/g, '');
+            }
+            function sha256(s) {
+              return crypto.createHash('sha256')
+                .update(normalize(s), 'utf8').digest('hex');
+            }
+
+            // Issue Forms は「### ラベル名」の次行に値が入る。
+            // 見出しから次の見出し（または末尾）までを回答として取り出す。
+            const body = context.payload.issue.body || '';
+            function extract(label) {
+              const esc = label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+              // 見出し行の空白は [ \t] のみ（改行は食わせない）。見出し行末の
+              // 改行を 1 個だけ消費し、次の見出しか末尾まで遅延マッチで取る。
+              const re = new RegExp(
+                '###[ \\t]*' + esc + '[ \\t]*\\r?\\n([\\s\\S]*?)(?=\\r?\\n###[ \\t]|\\s*$)'
+              );
+              const m = body.match(re);
+              return m ? m[1].trim() : '';
+            }
+
+            // --- 採点 ---------------------------------------------------------
+            const total = Object.keys(labels).length;
+            let score = 0;
+            const rows = [];
+            for (const key of Object.keys(labels)) {
+              const answer = extract(labels[key]);
+              const correct = answer.length > 0
+                && sha256(answer) === answerHashes[key];
+              if (correct) score++;
+              rows.push(`- ${labels[key]}: ${correct ? '⭕️ 正解' : '❌ 不正解'}`);
+            }
+
+            const perfect = score === total;
+            const closing = perfect
+              ? '🎉 満点です！おめでとう、よくできました！'
+              : 'もう一度チャレンジしてみよう。新しい Issue を立てれば再挑戦できます。';
+
+            const comment = [
+              '## 採点結果',
+              '',
+              ...rows,
+              '',
+              `**得点: ${score}/${total}**`,
+              '',
+              closing,
+            ].join('\n');
+
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.issue.number;
+
+            await github.rest.issues.createComment({
+              owner, repo, issue_number, body: comment,
+            });
+
+            // 得点ラベルを付与（存在しなければ API 側で自動作成される）
+            await github.rest.issues.addLabels({
+              owner, repo, issue_number, labels: [`score-${score}`],
+            });
+
+            // 採点済みとして Issue をクローズ
+            await github.rest.issues.update({
+              owner, repo, issue_number, state: 'closed',
+            });
