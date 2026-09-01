@@ -6,37 +6,64 @@ body:
   - type: markdown
     attributes:
       value: |
-        ⚠️ **注意**
+        **注意**
 
         回答は公開されます。個人情報は書かないでください。
-
-        各問、答えだけでなく **途中式** も書いてください。
+        各問、答えだけでなく途中式も書いてください。
   - type: textarea
     id: q1
     attributes:
-      label: 問1 数の分類（√49, √5, -7/3 を有理数・無理数に分類）
-      description: 途中式も書いてください。
+      label: 問1 実数と絶対値
+      description: √11の分類と絶対値の計算について、理由・途中式も書いてください。
     validations:
       required: true
   - type: textarea
     id: q2
     attributes:
-      label: 問2 絶対値（|6-11|, |-4|-|-9|）
-      description: 途中式も書いてください。
+      label: 問2 整式の計算
+      description: 同類項をまとめる途中式も書いてください。
     validations:
       required: true
   - type: textarea
     id: q3
     attributes:
-      label: 問3 展開（(2x-3)^2, (x+6)(x-6)）
-      description: 途中式も書いてください。
+      label: 問3 展開と因数分解
+      description: 展開と因数分解の途中式も書いてください。
     validations:
       required: true
   - type: textarea
     id: q4
     attributes:
-      label: 問4 因数分解（x^2+3x-10, 5x^2+15x）
-      description: 途中式も書いてください。
+      label: 問4 整式の除法と因数定理
+      description: P(1)の計算と因数分解の過程を書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: q5
+    attributes:
+      label: 問5 分数式
+      description: 通分の途中式と定義されない値を書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: q6
+    attributes:
+      label: 問6 平方根
+      description: 根号を簡単にする過程と有理化の途中式を書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: q7
+    attributes:
+      label: 問7 複素数の相等と加減乗
+      description: 実部・虚部の比較と乗法の途中式を書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: q8
+    attributes:
+      label: 問8 複素数の除法と絶対値
+      description: 共役複素数を用いた計算過程も書いてください。
     validations:
       required: true
   - type: checkboxes

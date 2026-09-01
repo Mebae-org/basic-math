@@ -1,0 +1,54 @@
+name: 課題05 三角関数 の提出
+description: 第5章の課題05を提出します（教員が手動で採点します）
+title: "[課題05] 三角関数"
+labels: ["assignment", "ch05"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **提出前の確認**
+
+        この課題は教員が手動で採点します。各問で答えだけでなく途中式または判断の根拠を書いてください。
+        回答は公開されます。個人情報は書かないでください。
+  - type: textarea
+    id: q1
+    attributes:
+      label: 問1 弧度法（4点）
+      description: 300°を弧度法で表し、半径6、中心角300°の扇形の弧の長さと面積を、途中式とともに求めてください。
+    validations:
+      required: true
+  - type: textarea
+    id: q2
+    attributes:
+      label: 問2 一般角と三角関数（4点）
+      description: θ=-5π/3 と同じ終辺をもつ 0≦α<2π の角αと、sinθ、cosθ、tanθを単位円を用いて求めてください。
+    validations:
+      required: true
+  - type: textarea
+    id: q3
+    attributes:
+      label: 問3 三角関数の性質とグラフ（4点）
+      description: y=2sin(3x+π/2)-1 の振幅、周期、中心線、横方向の移動、値域、1周期分の概形を示してください。
+    validations:
+      required: true
+  - type: textarea
+    id: q4
+    attributes:
+      label: 問4 三角方程式と三角不等式（4点）
+      description: 0≦x<2π で 2sinx+1=0 と cosx≧1/2 を、途中式とともに解いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: q5
+    attributes:
+      label: 問5 加法定理とその帰結（4点）
+      description: 加法定理で sin15° を求め、sinx+cosx を一つの三角関数に合成して最大値を求めてください。
+    validations:
+      required: true
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: 公開への同意
+      options:
+        - label: 回答が公開されることを理解し、公開に同意します
+          required: true
