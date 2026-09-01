@@ -2,8 +2,8 @@
 
 - 対象範囲: [`docs/index.md`](../docs/index.md) 1.1〜1.5
 - 配点: 20 点
-- 提出期限: （記入してください）
-- 提出方法: （LMS / Issue など。記入してください）
+- 提出期限: 随時
+- 提出方法: [課題01 提出フォーム（Issue）](https://github.com/Mebae-org/basic-math/issues/new?template=assignment-ch01.yml) から提出してください
 
 > 解答だけでなく **途中式** も書くこと。途中式のない解答は減点対象。
 

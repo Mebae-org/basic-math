@@ -1,0 +1,48 @@
+name: 課題01 数と式 の提出
+description: 第1章 数と式 の課題01を提出します（採点は手動で行います）
+title: "[課題01] 数と式"
+labels: ["assignment", "ch01"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ⚠️ **注意**
+
+        回答は公開されます。個人情報は書かないでください。
+
+        各問、答えだけでなく **途中式** も書いてください。
+  - type: textarea
+    id: q1
+    attributes:
+      label: 問1 数の分類（√49, √5, -7/3 を有理数・無理数に分類）
+      description: 途中式も書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: q2
+    attributes:
+      label: 問2 絶対値（|6-11|, |-4|-|-9|）
+      description: 途中式も書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: q3
+    attributes:
+      label: 問3 展開（(2x-3)^2, (x+6)(x-6)）
+      description: 途中式も書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: q4
+    attributes:
+      label: 問4 因数分解（x^2+3x-10, 5x^2+15x）
+      description: 途中式も書いてください。
+    validations:
+      required: true
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: 確認
+      options:
+        - label: 回答が公開されることを理解しています
+          required: true
