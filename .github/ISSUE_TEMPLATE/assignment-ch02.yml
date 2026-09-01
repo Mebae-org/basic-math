@@ -1,70 +1,50 @@
-name: 課題02 方程式と不等式 の提出
-description: 第2章 方程式と不等式 の課題02を提出します（教員が手動で採点します）
+name: 課題02 方程式と不等式の提出
+description: 第2章「方程式と不等式」の数値解答をGitHub Actionsで自動採点します
 title: "[課題02] 方程式と不等式"
 labels: ["assignment", "ch02"]
 body:
   - type: markdown
     attributes:
       value: |
-        **注意**
-
-        回答は公開されます。個人情報は書かないでください。
-
-        すべての問で、答えだけでなく **途中式・条件確認・根拠** も書いてください。採点は教員が手動で行います。
-  - type: textarea
+        各問の解答は、単位・式・途中式を含めず、半角の整数1つだけを入力してください。
+  - type: input
     id: q1
     attributes:
-      label: 問1 二次方程式（3x²-4x-2=0）
-      description: 解の公式による途中式と、判別式による実数解の個数を書いてください。
+      label: 問1
+      description: "方程式 $x^2-7x+12=0$ の大きい方の解を求めよ。"
+      placeholder: 半角の整数1つだけを入力
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: q2
     attributes:
-      label: 問2 高次方程式と因数定理（x³+x²-10x+8=0）
-      description: 調べた値、因数定理、因数分解の過程を書いてください。
+      label: 問2
+      description: "方程式 $x^2+2x+5=0$ の実数解の個数を求めよ。"
+      placeholder: 半角の整数1つだけを入力
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: q3
     attributes:
-      label: 問3 連立方程式（y=2x-1, x²+y²=5）
-      description: 代入後の計算と、解の順序対を書いてください。
+      label: 問3
+      description: "連立方程式 $x+y=7$, $x-y=1$ を満たす $x$ を求めよ。"
+      placeholder: 半角の整数1つだけを入力
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: q4
     attributes:
-      label: 問4 無理方程式（√(x+4)=x-2）
-      description: 2乗前の条件、途中式、候補の検算を書いてください。
+      label: 問4
+      description: "不等式 $2x-5<6$ を満たす最大の整数 $x$ を求めよ。"
+      placeholder: 半角の整数1つだけを入力
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: q5
     attributes:
-      label: 問5 分数方程式（2/(x-1)+1/(x+2)=1）
-      description: 定義域の除外値と、分母を払った後の途中式を書いてください。
-    validations:
-      required: true
-  - type: textarea
-    id: q6
-    attributes:
-      label: 問6 一次不等式（-2<3-5x≤13）
-      description: 不等号の逆転を明示し、区間表示まで書いてください。
-    validations:
-      required: true
-  - type: textarea
-    id: q7
-    attributes:
-      label: 問7 二次不等式（-2x²+5x+3<0）
-      description: 零点、放物線の向き、符号判断を書いてください。
-    validations:
-      required: true
-  - type: textarea
-    id: q8
-    attributes:
-      label: 問8 恒等式と係数比較（2x²+7x-4≡A(x+1)²+B(x+1)+C）
-      description: 展開と係数比較の式を書いてください。
+      label: 問5
+      description: "方程式 $x^3-6x^2+11x-6=0$ のすべての解の和を求めよ。"
+      placeholder: 半角の整数1つだけを入力
     validations:
       required: true
   - type: checkboxes
